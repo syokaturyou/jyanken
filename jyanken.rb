@@ -1,13 +1,14 @@
 require "csv"
 
 type = 0
-state = 0
 puts "じゃんけん..."
 puts "1(グー)2(チョキ)3(パー)4(戦わない)"
 myhand = gets.to_i
 hand = rand(1..3)
+houkou = 0
+direction = 0
 
-
+loop {
   if type == 0
     if myhand == 1 && hand == 1
        puts "----------------"
@@ -74,58 +75,93 @@ hand = rand(1..3)
        puts "----------------"
     elsif myhand == 4
        puts "じゃんけんを終了します"
-       type = 4
+       break
     else
        puts "1~4のどれかを入力してください"
-       type = 4
+       break
     end
   
-  elsif type == 1
+  if type == 1
     puts "あいこで.."
     puts "1(グー)2(チョキ)3(パー)"
     myhand = gets.to_i
     hand = rand(1..3)
     type = 0
+  end
     
-  # elsif type == 2
-  #   puts "あっちむいて.."
-  #   puts "1(上)2(下)3(左)4(右)"
-  #   mydirection = gets.to_i
-  # 　direction = rand(1..4)
-  # 　if mydirection == direction
-  #     puts "----------------"
-  #     puts "方向が合いました。貴方の勝ちです"
-  #     type = 4
-  #     puts "----------------"
-  #   else
-  #     puts "----------------"
-  #     puts "方向が合いませんでした。やり直しです"
-  #     type = 0
-  #     puts "----------------"
-  #     puts "じゃんけん..."
-  #     puts "1(グー)2(チョキ)3(パー)4(戦わない)"
-  #     myhand = gets.to_i
-  #     hand = rand(1..3)
-  #   end
-    
-  # elsif type == 3
-  #   puts "あっちむいて.."
-  #   puts "1(上)2(下)3(左)4(右)"
-  #   mydirection = gets.to_i
-  # 　direction = rand(1..4)
-  # 　if mydirection == direction
-  #     puts "----------------"
-  #     puts "方向が合いました。貴方の負けです"
-  #     type = 4
-  #     puts "----------------"
-  #   else
-  #     puts "----------------"
-  #     puts "方向が合いませんでした。やり直しです"
-  #     type = 0
-  #     puts "----------------"
-  #   end
-  
-  else
+  if type == 2
+    puts "あっちむいて.."
+    puts "1(上)2(下)3(左)4(右)"
+    houkou = gets.to_i
+    direction = rand(1..4)
+    if houkou == 1 || houkou == 2 || houkou == 3 || houkou == 4
+     type = 5
+    else
+     puts "1~4のどれかを入力してください"
+     break
+    end
   end
   
-# end
+  if type == 3
+    puts "あっちむいて.."
+    puts "1(上)2(下)3(左)4(右)"
+    houkou = gets.to_i
+    direction = rand(1..4)
+    if houkou == 1 || houkou == 2 || houkou == 3 || houkou == 4
+     type = 6
+    else
+     puts "1~4のどれかを入力してください"
+     break
+    end
+  end
+  
+  if type == 5
+   if houkou == direction
+    puts "----------------"
+    puts "方向が合いました。貴方の勝ちです"
+    puts "----------------"
+    break
+   elsif houkou != direction
+    puts "----------------"
+    puts "方向が合いませんでした。やり直しです"
+    type = 0
+    puts "----------------"
+    puts "じゃんけん..."
+    puts "1(グー)2(チョキ)3(パー)4(戦わない)"  
+    myhand = gets.to_i
+    hand = rand(1..3)
+    if myhand == 4
+      puts "じゃんけんを終了します"
+      break
+    end
+   end
+  end
+  
+  if type == 6
+   if houkou == direction
+    puts "----------------"
+    puts "方向が合いました。貴方の負けです"
+    puts "----------------"
+    break
+   elsif houkou != direction
+    puts "----------------"
+    puts "方向が合いませんでした。やり直しです"
+    type = 0
+    puts "----------------"
+    puts "じゃんけん..."
+    puts "1(グー)2(チョキ)3(パー)4(戦わない)"  
+    myhand = gets.to_i
+    hand = rand(1..3)
+    if myhand == 4
+      puts "じゃんけんを終了します"
+      break
+    end
+   end
+  end
+  
+else
+  puts "例外処理"
+  break
+end
+
+}
